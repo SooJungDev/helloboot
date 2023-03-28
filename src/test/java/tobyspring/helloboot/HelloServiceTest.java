@@ -16,29 +16,42 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 @UnitTest
-@interface FastUnitTest{
+@interface FastUnitTest {
 
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD,ElementType.ANNOTATION_TYPE})
+@Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Test
-@interface UnitTest{
+@interface UnitTest {
 
 }
 
 public class HelloServiceTest {
 
     @Test
-    void simpleHelloService(){
-        SimpleHelloService helloService = new SimpleHelloService();
+    void simpleHelloService() {
+        SimpleHelloService helloService = new SimpleHelloService(helloRepositoryStub);
         String ret = helloService.sayHello("Test");
 
         Assertions.assertThat(ret).isEqualTo("Hello Test");
     }
 
+    private static HelloRepository helloRepositoryStub = new HelloRepository() {
+        @Override
+        public Hello findHello(String name) {
+            return null;
+        }
+
+        @Override
+        public void increaseCount(String name) {
+
+        }
+    };
+
+
     @Test
-    void helloDecorator(){
+    void helloDecorator() {
         HelloDecorator helloDecorator = new HelloDecorator(name -> name);
         String ret = helloDecorator.sayHello("Test");
 
