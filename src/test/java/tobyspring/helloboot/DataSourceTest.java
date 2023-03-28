@@ -2,6 +2,7 @@ package tobyspring.helloboot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
  * Date : 2023.03.27
  * Time : 5:54 PM
  */
-@HellobootTest
+@JdbcTest
 public class DataSourceTest {
     @Autowired
     DataSource dataSource;

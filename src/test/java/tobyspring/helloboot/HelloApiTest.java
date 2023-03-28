@@ -1,6 +1,7 @@
 package tobyspring.helloboot;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,10 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Date : 2023.02.28
  * Time : 4:52 PM
  */
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class HelloApiTest {
 
     @Test
-    void helloApi(){
+    void helloApi() {
         // http localhost:8080/hello?name=Spring
         TestRestTemplate rest = new TestRestTemplate();
         ResponseEntity<String> res =
@@ -31,7 +33,7 @@ public class HelloApiTest {
     }
 
     @Test
-    void failHelloApi(){
+    void failHelloApi() {
         // http localhost:8080/hello?name=Spring
         TestRestTemplate rest = new TestRestTemplate();
         ResponseEntity<String> res =
